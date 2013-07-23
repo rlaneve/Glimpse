@@ -19,7 +19,7 @@ Middleweight release for MVC:
         </releaseNotes>
         <tags>ASP.NET Web MVC Glimpse diagnostics performance profiling timing</tags>
         <dependencies>
-          <dependency id="Glimpse.AspNet" version="1.6.0" />
+          <dependency id="Glimpse.AspNet" version="91.6.0" />
         </dependencies>
     </metadata>
     <files>
