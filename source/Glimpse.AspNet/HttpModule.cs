@@ -102,7 +102,8 @@ namespace Glimpse.AspNet
 
         internal void BeginRequest(HttpContextBase httpContext)
         {
-            // TODO: Add Logging to either methods here or in Runtime
+			if (isClassicAsp(httpContext.Request)) return;
+			// TODO: Add Logging to either methods here or in Runtime
             var runtime = GetRuntime(httpContext.Application);
 
             runtime.BeginRequest();
@@ -110,7 +111,8 @@ namespace Glimpse.AspNet
 
         internal void EndRequest(HttpContextBase httpContext)
         {
-            var runtime = GetRuntime(httpContext.Application);
+			if (isClassicAsp(httpContext.Request)) return;
+			var runtime = GetRuntime(httpContext.Application);
 
             runtime.EndRequest();
         }
@@ -141,9 +143,15 @@ namespace Glimpse.AspNet
 
         private void EndSessionAccess(HttpContextBase httpContext)
         {
-            var runtime = GetRuntime(httpContext.Application);
+			var runtime = GetRuntime(httpContext.Application);
 
             runtime.EndSessionAccess();
         }
+
+		private static bool isClassicAsp(HttpRequestBase request)
+		{
+			return (!string.IsNullOrEmpty(request.PhysicalPath) &&
+			        request.PhysicalPath.EndsWith(".asp", StringComparison.OrdinalIgnoreCase));
+		}
     }
 }
