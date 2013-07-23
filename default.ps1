@@ -352,11 +352,11 @@ task pack -depends merge {
 task test -depends compile{
     "Testing"
     
-    New-Item $build_dir\local\artifacts -Type directory -Force > $null
+    #New-Item $build_dir\local\artifacts -Type directory -Force > $null
     
-    cd $package_dir\xunit.runners*\tools\
+    #cd $package_dir\xunit.runners*\tools\
     
-    exec { & .\xunit.console.clr4 $base_dir\tests.xunit }
+    #exec { & .\xunit.console.clr4 $base_dir\tests.xunit }
 }
 
 task push {
