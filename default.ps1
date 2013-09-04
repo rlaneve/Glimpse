@@ -214,21 +214,6 @@ task merge -depends test {
     "   Glimpse.Mvc5"
     copy $source_dir\Glimpse.Mvc5\bin\Release\Glimpse.Mvc5.* $source_dir\Glimpse.Mvc5\nuspec\lib\net45\
     
-    "   Glimpse.EF43.Net40"
-    copy $source_dir\Glimpse.EF43.Net40\bin\Release\Glimpse.EF43.* $source_dir\Glimpse.EF43.Net40\nuspec\lib\net40\   
-    
-    "   Glimpse.EF5.Net45"
-    copy $source_dir\Glimpse.EF5.Net45\bin\Release\Glimpse.EF5.* $source_dir\Glimpse.EF5.Net45\nuspec\lib\net45\
-    
-    "   Glimpse.EF5.Net40"
-    copy $source_dir\Glimpse.EF5.Net40\bin\Release\Glimpse.EF5.* $source_dir\Glimpse.EF5.Net45\nuspec\lib\net40\   
-
-    "   Glimpse.EF6.Net45"
-    copy $source_dir\Glimpse.EF6.Net45\bin\Release\Glimpse.EF6.* $source_dir\Glimpse.EF6.Net45\nuspec\lib\net45\
-    
-    "   Glimpse.EF6.Net40"
-    copy $source_dir\Glimpse.EF6.Net40\bin\Release\Glimpse.EF6.* $source_dir\Glimpse.EF6.Net45\nuspec\lib\net40\ 
-	 
     "   Glimpse.WebForms.Net45"
     copy $source_dir\Glimpse.WebForms.Net45\bin\Release\Glimpse.WebForms.* $source_dir\Glimpse.WebForms.Net45\nuspec\lib\net45\
     
@@ -272,23 +257,10 @@ task pack -depends merge {
     $version = Get-AssemblyInformationalVersion $source_dir\Glimpse.Ado.Net45\Properties\AssemblyInfo.cs | Update-AssemblyInformationalVersion
     exec { & .\nuget.exe pack $source_dir\Glimpse.Ado.Net45\NuSpec\Glimpse.Ado.nuspec -OutputDirectory $build_dir\local -Symbols -Version $version }
     
-    "   Glimpse.EF43.nuspec"
-    $version = Get-AssemblyInformationalVersion $source_dir\Glimpse.EF43.Net40\Properties\AssemblyInfo.cs | Update-AssemblyInformationalVersion
-    exec { & .\nuget.exe pack $source_dir\Glimpse.EF43.Net40\NuSpec\Glimpse.EF43.nuspec -OutputDirectory $build_dir\local -Symbols -Version $version }
-    
-    "   Glimpse.EF5.nuspec"
-    $version = Get-AssemblyInformationalVersion $source_dir\Glimpse.EF5.Net45\Properties\AssemblyInfo.cs | Update-AssemblyInformationalVersion
-    exec { & .\nuget.exe pack $source_dir\Glimpse.EF5.Net45\NuSpec\Glimpse.EF5.nuspec -OutputDirectory $build_dir\local -Symbols -Version $version }
-
-    "   Glimpse.EF6.nuspec"
-    $version = Get-AssemblyInformationalVersion $source_dir\Glimpse.EF6.Net45\Properties\AssemblyInfo.cs | Update-AssemblyInformationalVersion
-    exec { & .\nuget.exe pack $source_dir\Glimpse.EF6.Net45\NuSpec\Glimpse.EF6.nuspec -OutputDirectory $build_dir\local -Symbols -Version $version }
-    
     "   Glimpse.WebForms.nuspec"
     $version = Get-AssemblyInformationalVersion $source_dir\Glimpse.WebForms.Net45\Properties\AssemblyInfo.cs | Update-AssemblyInformationalVersion
     exec { & .\nuget.exe pack $source_dir\Glimpse.WebForms.Net45\NuSpec\Glimpse.WebForms.nuspec -OutputDirectory $build_dir\local -Symbols -Version $version }
 
-    
     "   Glimpse.zip"
     New-Item $build_dir\local\zip\Core\net45 -Type directory -Force > $null
     New-Item $build_dir\local\zip\Core\net40 -Type directory -Force > $null
